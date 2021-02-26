@@ -4,7 +4,7 @@ const tbody = document.getElementById('table_body');
 form.addEventListener('submit', e => {
     e.preventDefault();
 
-    fetch('api/get_all_users.php')
+    fetch('api/get_users.php')
         .then(res => res.json())
         .then(res => {
             if(res.length > 0){
