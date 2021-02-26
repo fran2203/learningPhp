@@ -14,3 +14,7 @@ caption {
     font-size: 20px;
     border-bottom: none;
 }
+
+th:first-of-type {
+    width: 30%;
+}
