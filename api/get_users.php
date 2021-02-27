@@ -14,7 +14,7 @@
     if ($_GET['search'] === 'true' ) { //Si parámetro search por metodo GET es true hace lo siguiente
         if(isset($_GET['apellido'])) { //Entra en el condicional si se pasa lastName por parámetros
             $apellido = $_GET['apellido'];
-            $query = "SELECT * FROM datos_usuario WHERE apellido = '$apellido'";
+            $query = "SELECT * FROM datos_usuario WHERE apellido LIKE '%$apellido%'";
             $res = $conn->query($query);
 
             $arr = array();
@@ -36,7 +36,7 @@
 
         if(isset($_GET['nombre'])){ //Entra en el condicional si se pasa name por parámetros
             $nombre = $_GET['nombre'];
-            $query = "SELECT * FROM datos_usuario WHERE nombre = '$nombre'";
+            $query = "SELECT * FROM datos_usuario WHERE nombre LIKE '%$nombre%'";
             $res = $conn->query($query);
 
             $arr = array();
