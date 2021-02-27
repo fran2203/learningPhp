@@ -5,7 +5,9 @@ form.addEventListener('submit', e => {
     e.preventDefault();
     const valorInput = e.target.valor.value;
     if(valorInput === '') return fetchAll(); //Si se cumple la condicion, el evento termina acá
-    
+    const optionValue = e.target.Dato.value;
+    fecthParams(valorInput, optionValue);
+    form.reset();
 })
 
 function errorMesage(msg) {
@@ -26,6 +28,44 @@ function deleteRows() {
     }
 }
 
+function fecthParams(valor, param) {
+    fetch(`api/get_users.php?search=true&${param}=${valor}`)
+        .then(res => res.ok ? Promise.resolve(res) : Promise.reject(res))
+        .then(res => res.json())
+        .then(res => {
+            if(tbody.firstChild !== null){
+                deleteRows();
+            }
+            if(document.querySelector('.error') !== null) {
+                document.querySelector('.error').remove()
+            }
+            for (let i = 0; i < res.length; i++) {
+                const row = document.createElement('tr');
+                const {nombre, apellido, edad, contraseña} = res[i];
+                const fragment = document.createDocumentFragment();
+
+                const td_name = document.createElement('td');
+                const td_last = document.createElement('td');
+                const td_age = document.createElement('td');
+                const td_pass = document.createElement('td');
+
+                td_name.textContent = nombre;
+                td_last.textContent = apellido;
+                td_age.textContent = edad;
+                td_pass.textContent = contraseña;
+
+                fragment.append(td_name);
+                fragment.append(td_last);
+                fragment.append(td_age);
+                fragment.append(td_pass);
+
+                row.append(fragment);
+                tbody.append(row);
+            }
+        })
+        .catch(err => console.log(form.before(errorMesage(err.statusText))));
+}
+
 function fetchAll() {
     fetch('api/get_users.php')
     .then(res => res.json())
@@ -33,6 +73,9 @@ function fetchAll() {
         if(res.length > 0){
             if(tbody.firstChild !== null){
                 deleteRows();
+            }
+            if(document.querySelector('.error') !== null) {
+                document.querySelector('.error').remove()
             }
             for (let i = 0; i < res.length; i++) {
                 const row = document.createElement('tr');
