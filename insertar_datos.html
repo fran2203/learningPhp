@@ -11,10 +11,26 @@
     <nav>
         <ul>
             <li><a href="/phpwithdb/index.html">Obtener datos</a></li>
-            <li><a href="/phpwithdb/obtener_datos.html">Insertar datos</a></li>
+            <li><a href="/phpwithdb/insertar_datos.html">Insertar datos</a></li>
         </ul>
     </nav>
     <main>
+        <h1>Enviar datos</h1>
+        <form action="/phpwithdb/api/post_user.php" method="POST" id="post_form">
+            <label for="nombre">
+                Nombre: <input id="nombre"type="text" name="nombre" required>
+            </label>
+            <label for="apellido">
+                Apellido: <input id="apellido" type="text" name="apellido" required>
+            </label>
+            <label for="edad">
+                Edad: <input id="edad" type="number" name="edad" required>
+            </label>
+            <label for="password">
+                Contraseña: <input id="password" type="password" name="password" required>
+            </label>
+            <button type="submit">Enviar</button>
+        </form>
     </main>
 </body>
 </html>
