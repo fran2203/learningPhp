@@ -63,7 +63,11 @@ function fecthParams(valor, param) {
                 tbody.append(row);
             }
         })
-        .catch(err => console.log(form.before(errorMesage(err.statusText))));
+        .catch(err => {
+            if(document.querySelector('.error') === null) {
+                form.before(errorMesage(err.statusText));
+            }
+        });
 }
 
 function fetchAll() {
