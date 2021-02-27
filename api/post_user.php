@@ -11,5 +11,5 @@
 
     $conn->set_charset('utf8');
 
-    var_dump($_POST);
+    echo json_encode(($_POST));
 ?>

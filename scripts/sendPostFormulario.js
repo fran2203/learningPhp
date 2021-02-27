@@ -12,7 +12,12 @@ postForm.addEventListener('submit', e => {
         form.append('edad', edad.value);
         form.append('password', password.value);
 
-        console.log(form);
+        fetch('api/post_user.php', {
+            method: 'POST',
+            body: form,
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
     } else {
         console.log('Debe llenar todos los datos');
     }
