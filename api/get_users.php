@@ -12,8 +12,8 @@
     $conn->set_charset('utf8');
 
     if ($_GET['search'] === 'true' ) { //Si parámetro search por metodo GET es true hace lo siguiente
-        if(isset($_GET['lastName'])) { //Entra en el condicional si se pasa lastName por parámetros
-            $apellido = $_GET['lastName'];
+        if(isset($_GET['apellido'])) { //Entra en el condicional si se pasa lastName por parámetros
+            $apellido = $_GET['apellido'];
             $query = "SELECT * FROM datos_usuario WHERE apellido = '$apellido'";
             $res = $conn->query($query);
 
@@ -34,8 +34,8 @@
             die(json_encode($arr));
         }
 
-        if(isset($_GET['name'])){ //Entra en el condicional si se pasa name por parámetros
-            $nombre = $_GET['name'];
+        if(isset($_GET['nombre'])){ //Entra en el condicional si se pasa name por parámetros
+            $nombre = $_GET['nombre'];
             $query = "SELECT * FROM datos_usuario WHERE nombre = '$nombre'";
             $res = $conn->query($query);
 
@@ -56,8 +56,8 @@
             die(json_encode($arr));
         }
 
-        if(isset($_GET['age'])){
-            $edad = $_GET['age'];
+        if(isset($_GET['edad'])){
+            $edad = $_GET['edad'];
             $query = "SELECT * FROM datos_usuario WHERE edad = $edad";
             $res = $conn->query($query);
 
