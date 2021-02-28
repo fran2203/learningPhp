@@ -15,6 +15,32 @@
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
     $password = $_POST['password'];
+    $dataArr = array($nombre, $apellido, $edad, $password);
+    
+    for ($i=0; $i < count($dataArr); $i++) { 
+        if($dataArr[$i] === '' || $dataArr[$i] === NULL){
+            $conn->close();
+
+            header('HTTP/1.1 400 Bad Request');
+            header('Content-Type: application/json; charset=UTF-8');
+            die(json_encode(array('error' => 'No envió toda la información necesaria')));
+        }
+        if(str_contains($dataArr[$i], ' ')){
+            $conn->close();
+            
+            header('HTTP/1.1 422 Unprocessable Entity');
+            header('Content-Type: application/json; charset=UTF-8');
+            die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
+        }
+    }
+
+    if(comprobeType($nombre, $apellido, $edad, $password) === false ) {
+        $conn->close();
+
+        header('HTTP/1.1 422 Unprocessable Entity');
+        header('Content-Type: application/json; charset=UTF-8');
+        die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
+    }
 
     $query = "INSERT INTO datos_usuario (nombre, apellido, contraseña, edad) 
                 VALUES ('$nombre', '$apellido', '$password', $edad)";
@@ -30,5 +56,22 @@
     header('HTTP/1.1 201 Created');
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode(array('message' => 'Dato creado correctamente'));
+
+    function comprobeType($nombre, $apellido, $edad, $password){
+        $typeArr = array(intval($nombre), intval($apellido), intval($password));
+
+        if ($edad !== '0') {
+            if(intval($edad) < 0 ||intval($edad) === 0){
+                return false;
+            }
+        }
+
+        for ($i=0; $i < count($typeArr); $i++) { 
+            if ($typeArr[$i] !== 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 ?>
