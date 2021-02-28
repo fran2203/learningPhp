@@ -6,11 +6,11 @@ form.addEventListener('submit', e => {
     const valorInput = e.target.valor.value;
     if(valorInput === '') return fetchAll(); //Si se cumple la condicion, el evento termina acá
     const optionValue = e.target.Dato.value;
-    fecthParams(valorInput, optionValue);
+    fetchParams(valorInput, optionValue);
     form.reset();
 })
 
-function errorMesage(msg) {
+function errorMessage(msg) {
     const errDiv = document.createElement('div');
     errDiv.classList.add('error');
 
@@ -28,7 +28,7 @@ function deleteRows() {
     }
 }
 
-function fecthParams(valor, param) {
+function fetchParams(valor, param) {
     fetch(`api/get_users.php?search=true&${param}=${valor}`)
         .then(res => res.ok ? Promise.resolve(res) : Promise.reject(res))
         .then(res => res.json())
@@ -65,7 +65,7 @@ function fecthParams(valor, param) {
         })
         .catch(err => {
             if(document.querySelector('.error') === null) {
-                form.before(errorMesage(err.statusText));
+                form.before(errorMessage(err.statusText));
             }
         });
 }
@@ -105,7 +105,7 @@ function fetchAll() {
                 tbody.append(row);
             }
         } else {
-            form.before(errorMesage('No hay datos en la base de datos'))
+            form.before(errorMessage('No hay datos en la base de datos'))
         }
     });
 }
