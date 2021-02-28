@@ -38,14 +38,12 @@ function comprobarDatos(nombre, apellido, edad, password){
     const edVal = edad.value;
     const paVal = password.value;
 
+    let compr = false;
 
-    let firstComp = false;
-    let secondComp = false;
-
-    if (nVal !== '' && apVal !== '' && edVal !== '' && paVal !== '') firstComp = true;
-    secondComp = convertToNumber(nVal, apVal, edVal, paVal);
-
-    return firstComp && secondComp;
+    if (nVal !== '' && apVal !== '' && edVal !== '' && paVal !== '') {
+        compr = convertToNumber(nVal, apVal, edVal, paVal);
+        return compr ? true : false;
+    }
 }
 
 function convertToNumber(name, lastName, age, pass){
