@@ -33,17 +33,19 @@ postForm.addEventListener('submit', e => {
 })
 
 function comprobarDatos(nombre, apellido, edad, password){
-    const nVal = nombre.value;
-    const apVal = apellido.value;
-    const edVal = edad.value;
-    const paVal = password.value;
+    const data = [nombre.value, apellido.value, edad.value, password.value];
+    let compr = true;
 
-    let compr = false;
-
-    if (nVal !== '' && apVal !== '' && edVal !== '' && paVal !== '') {
-        compr = convertToNumber(nVal, apVal, edVal, paVal);
-        return compr ? true : false;
+    for (const d of data) {
+        if(d === '' || d.includes(' ')) {
+            compr = false;
+            break;
+        }
     }
+
+    if (compr) compr = convertToNumber(...data);
+
+    return compr;
 }
 
 function convertToNumber(name, lastName, age, pass){
