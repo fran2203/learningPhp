@@ -29,7 +29,7 @@ function deleteRows() {
 }
 
 function fetchParams(valor, param) {
-    fetch(`api/get_users.php?search=true&${param}=${valor}`)
+    fetch(`api/users.php?search=true&${param}=${valor}`)
         .then(res => res.ok ? Promise.resolve(res) : Promise.reject(res))
         .then(res => res.json())
         .then(res => {
@@ -71,7 +71,7 @@ function fetchParams(valor, param) {
 }
 
 function fetchAll() {
-    fetch('api/get_users.php')
+    fetch('api/users.php')
     .then(res => res.json())
     .then(res => {
         if(res.length > 0){
