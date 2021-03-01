@@ -41,23 +41,23 @@ function fetchParams(valor, param) {
             }
             for (let i = 0; i < res.length; i++) {
                 const row = document.createElement('tr');
-                const {nombre, apellido, edad, id} = res[i];
+                const {id, nombre, apellido, edad} = res[i];
                 const fragment = document.createDocumentFragment();
-
+                
+                const td_id = document.createElement('td');
                 const td_name = document.createElement('td');
                 const td_last = document.createElement('td');
                 const td_age = document.createElement('td');
-                const td_id = document.createElement('td');
 
+                td_id.textContent = id;
                 td_name.textContent = nombre;
                 td_last.textContent = apellido;
                 td_age.textContent = edad;
-                td_id.textContent = id;
 
+                fragment.append(td_id);
                 fragment.append(td_name);
                 fragment.append(td_last);
                 fragment.append(td_age);
-                fragment.append(td_id);
 
                 row.append(fragment);
                 tbody.append(row);
@@ -74,6 +74,7 @@ function fetchAll() {
     fetch('api/users.php')
     .then(res => res.json())
     .then(res => {
+        console.log(res)
         if(res.length > 0){
             if(tbody.firstChild !== null){
                 deleteRows();
@@ -83,7 +84,7 @@ function fetchAll() {
             }
             for (let i = 0; i < res.length; i++) {
                 const row = document.createElement('tr');
-                const {nombre, apellido, edad, id} = res[i];
+                const {id, nombre, apellido, edad} = res[i];
                 const fragment = document.createDocumentFragment();
 
                 const td_name = document.createElement('td');
@@ -91,15 +92,15 @@ function fetchAll() {
                 const td_age = document.createElement('td');
                 const td_id = document.createElement('td');
 
+                td_id.textContent = id;
                 td_name.textContent = nombre;
                 td_last.textContent = apellido;
                 td_age.textContent = edad;
-                td_id.textContent = id;
 
+                fragment.append(td_id);
                 fragment.append(td_name);
                 fragment.append(td_last);
                 fragment.append(td_age);
-                fragment.append(td_id);
 
                 row.append(fragment);
                 tbody.append(row);
