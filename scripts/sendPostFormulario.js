@@ -19,11 +19,12 @@ postForm.addEventListener('submit', e => {
             method: 'POST',
             body: form,
         })
-        .then(res => res.ok ? Promise.resolve(res) : Promise.reject(res))
-        .then(res => res.json())
         .then(res => {
-            postForm.before(okMessage(res.message));
+            const json = res.json()
+            if(res.ok) return json
+            return json.then(Promise.reject.bind(Promise))
         })
+        .then(res => postForm.before(okMessage(res.message)))
         .catch(err => postForm.before(errorMessage(err.error)));
     } else {
         postForm.before(errorMessage('Hubo un error al ingresar los datos.'));

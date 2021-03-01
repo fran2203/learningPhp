@@ -37,14 +37,13 @@
 
         public function typeVerification(){
             $typeArr = array(intval($this->name), intval($this->lastName));
-
             if ($this->age !== '0') {
                 if(intval($this->age) < 0 ||intval($this->age) === 0){
                     return 422;
                 }
             }
 
-            for ($i=0; $i < count($typeArr); $i++) { 
+            for ($i=0; $i < count($typeArr); $i++) {
                 if ($typeArr[$i] !== 0) {
                     return 422;
                 }
