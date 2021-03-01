@@ -34,18 +34,14 @@ postForm.addEventListener('submit', e => {
 
 function comprobarDatos(nombre, apellido, edad, password){
     const data = [nombre.value, apellido.value, edad.value, password.value];
-    let compr = true;
 
     for (const d of data) {
         if(d === '' || d.includes(' ')) {
-            compr = false;
-            break;
+            return false;
         }
     }
 
-    if (compr) compr = convertToNumber(...data);
-
-    return compr;
+    return convertToNumber(...data);
 }
 
 function convertToNumber(name, lastName, age, pass){
