@@ -7,5 +7,8 @@
         case 'POST':
             include('post_user.php');
             break;
+        case 'PUT':
+            include('update_user.php');
+            break;
     }
 ?>
