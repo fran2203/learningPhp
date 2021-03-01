@@ -2,19 +2,18 @@ const postForm = document.getElementById('post_form');
 
 postForm.addEventListener('submit', e => {
     e.preventDefault();
-    const {nombre, apellido, edad, password} = e.target;
+    const {nombre, apellido, edad} = e.target;
 
     //*Eliminar errorMsg u okMsg si es que estos existen
     if(document.querySelector('.error') !== null) document.querySelector('.error').remove();
     if(document.querySelector('.ok') !== null) document.querySelector('.ok').remove();
 
-    if (comprobarDatos(nombre, apellido, edad, password)){
+    if (comprobarDatos(nombre, apellido, edad)){
         const form = new FormData();
 
         form.append('nombre', nombre.value);
         form.append('apellido', apellido.value);
         form.append('edad', edad.value);
-        form.append('password', password.value);
 
         fetch('api/post_user.php', {
             method: 'POST',
@@ -34,8 +33,8 @@ postForm.addEventListener('submit', e => {
     postForm.reset();
 })
 
-function comprobarDatos(nombre, apellido, edad, password){
-    const data = [nombre.value, apellido.value, edad.value, password.value];
+function comprobarDatos(nombre, apellido, edad){
+    const data = [nombre.value, apellido.value, edad.value];
 
     for (const d of data) {
         if(d === '' || d.includes(' ')) {
