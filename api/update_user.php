@@ -34,6 +34,17 @@
         die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
     }
 
+    $query = "UPDATE datos_usuario SET nombre = $nombre, apellido = $apellido, edad = $edad 
+                WHERE id = $id";
+
+    if($conn->query($query) === false){
+        header('HTTP/1.1 500 Internal Server Error');
+        header('Content-Type: application/json; charset=UTF-8');
+        die(json_encode(array('error' => 'Fallo en la creación del dato')));
+    }
+
+    $conn->close();
+
     header('HTTP/1.1 200 Ok');
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode(array('message' => 'Dato actualizado correctamente'));
