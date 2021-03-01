@@ -3,7 +3,8 @@ const postForm = document.getElementById('post_form');
 postForm.addEventListener('submit', e => {
     e.preventDefault();
     const {nombre, apellido, edad, password} = e.target;
-    //Eliminar errorMsg o okMsg si los hay
+
+    //*Eliminar errorMsg u okMsg si es que estos existen
     if(document.querySelector('.error') !== null) document.querySelector('.error').remove();
     if(document.querySelector('.ok') !== null) document.querySelector('.ok').remove();
 
@@ -22,7 +23,7 @@ postForm.addEventListener('submit', e => {
         .then(res => {
             const json = res.json()
             if(res.ok) return json
-            return json.then(Promise.reject.bind(Promise))
+            return json.then(err => {throw err})
         })
         .then(res => postForm.before(okMessage(res.message)))
         .catch(err => postForm.before(errorMessage(err.error)));
