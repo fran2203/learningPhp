@@ -78,9 +78,9 @@
             die(json_encode($arr));
         }
 
-        if(isset($_GET['password'])){
-            $contra = $_GET['password'];
-            $query = "SELECT * FROM datos_usuario WHERE contraseña = '$contra'";
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $query = "SELECT * FROM datos_usuario WHERE id = $id";
             $res = $conn->query($query);
 
             $arr = array();
