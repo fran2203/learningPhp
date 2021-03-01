@@ -41,23 +41,23 @@ function fetchParams(valor, param) {
             }
             for (let i = 0; i < res.length; i++) {
                 const row = document.createElement('tr');
-                const {nombre, apellido, edad, contraseña} = res[i];
+                const {nombre, apellido, edad, id} = res[i];
                 const fragment = document.createDocumentFragment();
 
                 const td_name = document.createElement('td');
                 const td_last = document.createElement('td');
                 const td_age = document.createElement('td');
-                const td_pass = document.createElement('td');
+                const td_id = document.createElement('td');
 
                 td_name.textContent = nombre;
                 td_last.textContent = apellido;
                 td_age.textContent = edad;
-                td_pass.textContent = contraseña;
+                td_id.textContent = id;
 
                 fragment.append(td_name);
                 fragment.append(td_last);
                 fragment.append(td_age);
-                fragment.append(td_pass);
+                fragment.append(td_id);
 
                 row.append(fragment);
                 tbody.append(row);
@@ -83,23 +83,23 @@ function fetchAll() {
             }
             for (let i = 0; i < res.length; i++) {
                 const row = document.createElement('tr');
-                const {nombre, apellido, edad, contraseña} = res[i];
+                const {nombre, apellido, edad, id} = res[i];
                 const fragment = document.createDocumentFragment();
 
                 const td_name = document.createElement('td');
                 const td_last = document.createElement('td');
                 const td_age = document.createElement('td');
-                const td_pass = document.createElement('td');
+                const td_id = document.createElement('td');
 
                 td_name.textContent = nombre;
                 td_last.textContent = apellido;
                 td_age.textContent = edad;
-                td_pass.textContent = contraseña;
+                td_id.textContent = id;
 
                 fragment.append(td_name);
                 fragment.append(td_last);
                 fragment.append(td_age);
-                fragment.append(td_pass);
+                fragment.append(td_id);
 
                 row.append(fragment);
                 tbody.append(row);
