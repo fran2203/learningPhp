@@ -1,5 +1,6 @@
 <?php
     include('../db_config.php');
+    include('../classes/userClass.php');
 
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -15,28 +16,19 @@
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
     $password = $_POST['password'];
-    $dataArr = array($nombre, $apellido, $edad, $password);
+
+    $user = new User($nombre, $apellido, $edad, $password);
     
-    for ($i=0; $i < count($dataArr); $i++) { 
-        if($dataArr[$i] === '' || $dataArr[$i] === NULL){
-            $conn->close();
-
-            header('HTTP/1.1 400 Bad Request');
-            header('Content-Type: application/json; charset=UTF-8');
-            die(json_encode(array('error' => 'No envió toda la información necesaria')));
-        }
-        if(str_contains($dataArr[$i], ' ')){
-            $conn->close();
-            
-            header('HTTP/1.1 422 Unprocessable Entity');
-            header('Content-Type: application/json; charset=UTF-8');
-            die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
-        }
-    }
-
-    if(comprobeType($nombre, $apellido, $edad, $password) === false ) {
+    if($user->emptyNullVerification() === 400) {
         $conn->close();
 
+        header('HTTP/1.1 400 Bad Request');
+        header('Content-Type: application/json; charset=UTF-8');
+        die(json_encode(array('error' => 'No envió toda la información necesaria')));
+    }
+    if($user->whiteSpaceVerification() === 422 || $user->typeVerification() === 422) {
+        $conn->close();
+            
         header('HTTP/1.1 422 Unprocessable Entity');
         header('Content-Type: application/json; charset=UTF-8');
         die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
@@ -56,22 +48,4 @@
     header('HTTP/1.1 201 Created');
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode(array('message' => 'Dato creado correctamente'));
-
-    function comprobeType($nombre, $apellido, $edad, $password){
-        $typeArr = array(intval($nombre), intval($apellido), intval($password));
-
-        if ($edad !== '0') {
-            if(intval($edad) < 0 ||intval($edad) === 0){
-                return false;
-            }
-        }
-
-        for ($i=0; $i < count($typeArr); $i++) { 
-            if ($typeArr[$i] !== 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
 ?>
