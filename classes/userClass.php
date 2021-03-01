@@ -15,7 +15,7 @@
             $dataArr = array($this->name, $this->lastName, $this->age, $this->password);
 
             for ($i=0; $i < count($dataArr); $i++) { 
-                if($dataArr[$i] === '' || $dataArr[$i] === NULL){
+                if($dataArr[$i] === '' || $dataArr[$i] === null){
                     return 400;
                 }
             }
