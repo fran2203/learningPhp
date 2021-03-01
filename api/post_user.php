@@ -15,7 +15,6 @@
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
-    $password = $_POST['password'];
 
     $user = new User($nombre, $apellido, $edad, $password);
     
@@ -34,8 +33,8 @@
         die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
     }
 
-    $query = "INSERT INTO datos_usuario (nombre, apellido, contraseña, edad) 
-                VALUES ('$nombre', '$apellido', '$password', $edad)";
+    $query = "INSERT INTO datos_usuario (nombre, apellido, edad) 
+                VALUES ('$nombre', '$apellido', $edad)";
 
     if($conn->query($query) === false){
         header('HTTP/1.1 500 Internal Server Error');
