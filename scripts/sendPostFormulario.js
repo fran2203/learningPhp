@@ -24,7 +24,7 @@ postForm.addEventListener('submit', e => {
         .then(res => {
             postForm.before(okMessage(res.message));
         })
-        .catch(err => postForm.before(errorMessage(err)));
+        .catch(err => postForm.before(errorMessage(err.error)));
     } else {
         postForm.before(errorMessage('Hubo un error al ingresar los datos.'));
     }

@@ -36,7 +36,7 @@
         }
 
         public function typeVerification(){
-            $typeArr = array(intval($this->name), intval($this->lastName), intval($this->password));
+            $typeArr = array(intval($this->name), intval($this->lastName));
 
             if ($this->age !== '0') {
                 if(intval($this->age) < 0 ||intval($this->age) === 0){
