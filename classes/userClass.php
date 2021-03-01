@@ -24,8 +24,20 @@
         }
 
         public function whiteSpaceVerification(){
-            $dataArr = array($this->name, $this->lastName, $this->age, $this->password);
+            $dataArr = array($this->age, $this->password);
 
+            //* Es importante que un nombre o un apellido puede tener entre medio un espacio en blanco
+            //* Ej: Jose Maria
+
+            //* Si el nombre o el apellido empiezan con un espacio en blanco, retornan 422
+            if(str_starts_with($this->name, ' ') || str_starts_with($this->lastName, ' ')) {
+                return 422;
+            }
+            //* Si el nombre o el apellido terminan con un espacio en blanco, retornan 422
+            if(str_ends_with($this->name, ' ') || str_ends_with($this->lastName, ' ')) {
+                return 422;
+            }
+            
             for ($i=0; $i < count($dataArr); $i++) { 
                 if(str_contains($dataArr[$i], ' ')){
                     return 422;
