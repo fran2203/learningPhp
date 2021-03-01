@@ -16,7 +16,7 @@
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
 
-    $user = new User($nombre, $apellido, $edad, $password);
+    $user = new User($nombre, $apellido, $edad);
     
     if($user->emptyNullVerification() === 400) {
         $conn->close();

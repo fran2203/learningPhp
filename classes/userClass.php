@@ -3,16 +3,14 @@
         private $name;
         private $lastName;
         private $age;
-        private $id;
 
-        function __construct($nombre, $apellido, $edad, $id){
+        function __construct($nombre, $apellido, $edad){
             $this->name = $nombre;
             $this->lastName = $apellido;
             $this->age = $edad;
-            $this->id = $id;
         }
         public function emptyNullVerification(){
-            $dataArr = array($this->name, $this->lastName, $this->age, $this->id);
+            $dataArr = array($this->name, $this->lastName, $this->age);
 
             for ($i=0; $i < count($dataArr); $i++) { 
                 if($dataArr[$i] === '' || $dataArr[$i] === null){
@@ -24,7 +22,7 @@
         }
 
         public function whiteSpaceVerification(){
-            $dataArr = array($this->age, $this->id);
+            $dataArr = array($this->age);
 
             //* Es importante que un nombre o un apellido puede tener entre medio un espacio en blanco
             //* Ej: Jose Maria
@@ -38,10 +36,8 @@
                 return 422;
             }
             
-            for ($i=0; $i < count($dataArr); $i++) { 
-                if(str_contains($dataArr[$i], ' ')){
-                    return 422;
-                }
+            if(str_contains($this->age, ' ')) {
+                return 422;
             }
 
             return 0;
@@ -49,12 +45,9 @@
 
         public function typeVerification(){
             $typeArr = array(intval($this->name), intval($this->lastName));
-            
-            if ($this->age !== '0' || $this->id !== '0') {
+
+            if ($this->age !== '0') {
                 if(intval($this->age) < 0 ||intval($this->age) === 0){
-                    return 422;
-                }
-                if(intval($this->id) < 0 ||intval($this->id) === 0){
                     return 422;
                 }
             }
