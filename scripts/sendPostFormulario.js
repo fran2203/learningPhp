@@ -44,13 +44,12 @@ function comprobarDatos(nombre, apellido, edad, password){
     return convertToNumber(...data);
 }
 
-function convertToNumber(name, lastName, age, pass){
+function convertToNumber(name, lastName, age){
     const numName = Number(name);
     const numLast = Number(lastName);
     const numAge = Number(age);
-    const numPass = Number(pass);
 
-    if(isNaN(numAge) === false && isNaN(numName) && isNaN(numLast) && isNaN(numPass)){
+    if(isNaN(numAge) === false && isNaN(numName) && isNaN(numLast)){
         return true;
     }
     return false;
