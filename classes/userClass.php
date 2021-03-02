@@ -22,8 +22,6 @@
         }
 
         public function whiteSpaceVerification(){
-            $dataArr = array($this->age);
-
             //* Es importante que un nombre o un apellido puede tener entre medio un espacio en blanco
             //* Ej: Jose Maria
 

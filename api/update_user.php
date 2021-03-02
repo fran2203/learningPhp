@@ -15,9 +15,9 @@
     $nombre = $_PUT['nombre'];
     $apellido = $_PUT['apellido'];
     $edad = $_PUT['edad'];
-    $password = $_PUT['password'];
+    $id = $_PUT['id'];
 
-    $updatedUser = new User($nombre, $apellido, $edad, $password);
+    $updatedUser = new User($nombre, $apellido, $edad);
 
     if($updatedUser->emptyNullVerification() === 400) {
         $conn->close();
@@ -34,7 +34,7 @@
         die(json_encode(array('error' => 'La información fue enviada incorrectamente')));
     }
 
-    $query = "UPDATE datos_usuario SET nombre = $nombre, apellido = $apellido, edad = $edad 
+    $query = "UPDATE datos_usuario SET nombre = '$nombre', apellido = '$apellido', edad = $edad 
                 WHERE id = $id";
 
     if($conn->query($query) === false){
