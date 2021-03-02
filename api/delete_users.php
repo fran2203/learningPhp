@@ -1,5 +1,6 @@
 <?php
     include('../db_config.php');
+    
 
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -11,6 +12,7 @@
 
     parse_str(file_get_contents('php://input'), $_DELETE);
     $id = $_DELETE['id'];
+    
 
     $query = "DELETE FROM datos_usuario WHERE id = $id";
     if($conn->query($query) === false){
