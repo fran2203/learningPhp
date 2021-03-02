@@ -3,14 +3,16 @@
         private $name;
         private $lastName;
         private $age;
+        private $id;
 
-        function __construct($nombre, $apellido, $edad){
+        function __construct($nombre, $apellido, $edad, $user_id){
             $this->name = $nombre;
             $this->lastName = $apellido;
             $this->age = $edad;
+            $this->id = $user_id;
         }
         public function emptyNullVerification(){
-            $dataArr = array($this->name, $this->lastName, $this->age);
+            $dataArr = array($this->name, $this->lastName, $this->age, $this->id);
 
             for ($i=0; $i < count($dataArr); $i++) { 
                 if($dataArr[$i] === '' || $dataArr[$i] === null){
@@ -34,7 +36,7 @@
                 return 422;
             }
             
-            if(str_contains($this->age, ' ')) {
+            if(str_contains($this->age, ' ') || str_contains($this->id, ' ')) {
                 return 422;
             }
 
@@ -44,8 +46,11 @@
         public function typeVerification(){
             $typeArr = array(intval($this->name), intval($this->lastName));
 
-            if ($this->age !== '0') {
+            if ($this->age !== '0' || $this->id !== '0') {
                 if(intval($this->age) < 0 ||intval($this->age) === 0){
+                    return 422;
+                }
+                if(intval($this->id) < 0 ||intval($this->id) === 0){
                     return 422;
                 }
             }
