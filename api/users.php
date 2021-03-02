@@ -10,5 +10,8 @@
         case 'PUT':
             include('update_user.php');
             break;
+        case 'DELETE':
+            include('delete_user.php');
+            break;
     }
 ?>
