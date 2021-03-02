@@ -1,18 +1,16 @@
 <?php
     class User {
-        private $name;
-        private $lastName;
-        private $age;
-        private $id;
+        protected $name;
+        protected $lastName;
+        protected $age;
 
-        function __construct($nombre, $apellido, $edad, $user_id){
+        function __construct($nombre, $apellido, $edad){
             $this->name = $nombre;
             $this->lastName = $apellido;
             $this->age = $edad;
-            $this->id = $user_id;
         }
         public function emptyNullVerification(){
-            $dataArr = array($this->name, $this->lastName, $this->age, $this->id);
+            $dataArr = array($this->name, $this->lastName, $this->age);
 
             for ($i=0; $i < count($dataArr); $i++) { 
                 if($dataArr[$i] === '' || $dataArr[$i] === null){
@@ -36,7 +34,7 @@
                 return 422;
             }
             
-            if(str_contains($this->age, ' ') || str_contains($this->id, ' ')) {
+            if(str_contains($this->age, ' ')) {
                 return 422;
             }
 
@@ -46,15 +44,67 @@
         public function typeVerification(){
             $typeArr = array(intval($this->name), intval($this->lastName));
 
-            if ($this->age !== '0' || $this->id !== '0') {
+            if ($this->age !== '0') {
                 if(intval($this->age) < 0 ||intval($this->age) === 0){
-                    return 422;
-                }
-                if(intval($this->id) < 0 ||intval($this->id) === 0){
                     return 422;
                 }
             }
 
+            for ($i=0; $i < count($typeArr); $i++) {
+                if ($typeArr[$i] !== 0) {
+                    return 422;
+                }
+            }
+
+            return 0;
+        }
+    }
+
+    class UpdateUser extends User {
+        private $id;
+
+        public function __construct($user_id) {
+            $this->id = $user_id;
+        }
+
+        public function whiteSpaceVerification(){
+            if(str_starts_with($this->name, ' ') || str_starts_with($this->lastName, ' ')) {
+                return 422;
+            }
+            if(str_ends_with($this->name, ' ') || str_ends_with($this->lastName, ' ')) {
+                return 422;
+            }
+            
+            if(str_contains($this->age, ' ' || str_contains($this->id, ' '))) {
+                return 422;
+            }
+
+            return 0;
+        }
+        public function emptyNullVerification(){
+            $dataArr = array($this->name, $this->lastName, $this->age, $this->id);
+
+            for ($i=0; $i < count($dataArr); $i++) { 
+                if($dataArr[$i] === '' || $dataArr[$i] === null){
+                    return 400;
+                }
+            }
+
+            return 0;
+        }
+        public function typeVerification(){
+            $typeArr = array(intval($this->name), intval($this->lastName));
+
+            if ($this->age !== '0') {
+                if(intval($this->age) < 0 ||intval($this->age) === 0){
+                    return 422;
+                }
+            }
+            if ($this->id !== '0') {
+                if(intval($this->id) < 0 ||intval($this->id) === 0){
+                    return 422;
+                }
+            }
             for ($i=0; $i < count($typeArr); $i++) {
                 if ($typeArr[$i] !== 0) {
                     return 422;

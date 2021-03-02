@@ -17,7 +17,7 @@
     $edad = $_PUT['edad'];
     $id = $_PUT['id'];
 
-    $updatedUser = new User($nombre, $apellido, $edad);
+    $updatedUser = new UpdateUser($nombre, $apellido, $edad, $id);
 
     if($updatedUser->emptyNullVerification() === 400) {
         $conn->close();
