@@ -38,6 +38,8 @@
                 WHERE id = $id";
 
     if($conn->query($query) === false){
+        $conn->close();
+
         header('HTTP/1.1 500 Internal Server Error');
         header('Content-Type: application/json; charset=UTF-8');
         die(json_encode(array('error' => 'Fallo en la creación del dato')));
