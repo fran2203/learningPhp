@@ -29,7 +29,7 @@
                 return 400;
             }
 
-            return 400;
+            return 0;
         }
     }
 ?>
